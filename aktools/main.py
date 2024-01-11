@@ -7,6 +7,8 @@ Desc: 主程序入口文件
 import os
 import sys
 
+from extend import extend_test
+
 # 添加 package 查找路径，该行必须在前面，否则不能导入相关的模块
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
@@ -91,6 +93,7 @@ app.add_middleware(
 
 app.include_router(app_core, prefix="/api", tags=["数据接口"])
 app.include_router(app_user_login, prefix="/auth", tags=["登录接口"])
+app.include_router(extend_test, prefix="/extend", tags=["扩展接口"])
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8080, debug=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8080, reload=True)
